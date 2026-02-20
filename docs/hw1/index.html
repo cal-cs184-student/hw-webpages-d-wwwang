@@ -128,7 +128,28 @@
 		</div>
 
 		<h2>Task 3: Transforms</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		I applied a <code>rotate</code> transformation to both arm segments of the right arm, placing it between the 
+		<code>translate</code> and <code>scale</code> transformation. This order ensures the right arm is scaled first, 
+		then rotated, and finally translated, which avoids the translation from being distorted. The rotation was in 
+		negative degrees to rotate it CCW or upwards. 
+
+		<br><br>
+		
+		I applied another <code>rotate</code> transformation to the outermost arm segment of the left arm, placing it 
+		between the <code>translate</code> and <code>scale</code> transformation. Similarly, the same order was used, and 
+		the rotation in negative degrees rotates it downwards since the left arm points in the opposite direction from the 
+		ight arm.
+
+		<br><br>
+
+		Finally, I adjusted the <code>translate</code> transformation of the outermost arm segment of the left arm to offset it better relative to the innermost arm segment post rotation.
+
+		<br><br>
+
+		<figure>
+			<img src="task-3-robot.png" style="width:50%"/>
+			<figcaption>Task 3: My Robot Waving</figcaption>
+		</figure>
 
 		<h2>Task 4: Barycentric coordinates</h2>
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
