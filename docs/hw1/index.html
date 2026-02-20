@@ -67,7 +67,7 @@
 
 		<br><br>
 
-		The image below shows <code>test4.svg</code> centered on the red triangle in the middle.
+		The image below shows <code>svg/basic/test4.svg</code> centered on the red triangle in the middle.
 	
 		<br><br>
 
@@ -101,10 +101,12 @@
 
 		<br><br>
 
-		The images below shows <code>test4.svg</code> at sample rates 1, 4, and 16. At rate 1, the corner has jaggies due to 
+		The images below shows <code>svg/basic/test4.svg</code> at sample rates 1, 4, and 16. At rate 1, the corner has jaggies due to 
 		aliasing. Furthermore, the corner itself is slightly disconnected due to the pixel centers falling outside of the 
 		thin triangle tip. At rates 4 and 16, subsamples near the corner partially cover pixels that were entirely missed
 		at rate 1, resulting in a gradual fade rather than the hard cutoff that was observed prior.
+
+		<br><br>
 
 		<div style="display: flex; flex-direction: column; align-items: center;">
 			<table style="width: 100%; text-align: center; border-collapse: collapse;">
@@ -188,7 +190,66 @@
 		</figure>
 
 		<h2>Task 5: "Pixel sampling" for texture mapping</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		Pixel sampling is the process of determining the color of a pixel based on a continuous texture coordinate (UV).
+		This is used in the rasterization of textured triangles, where UV coordinates are computed at each sample point 
+		through barycentric interpolation.
+
+		<br><br>
+
+		This is done in <code>rasterize_textered_triangle</code>, where for each sample point inside the triangle, the
+		barycentric weights \(\alpha\), \(\beta\), \(\gamma\) are calculated and then used in the interpolation of the
+		UV coordinates from the three vertex UVs. Depending on <code>psm</code>, I performed either nearest or bilinear
+		pixel sampling (<code>sample_nearest</code> and <code>sample_bilinear</code> respectively).
+
+		<br><br>
+
+		The nearest pixel sampling method scales the UV coordinate to texel space and finds the nearest integer texel
+		through a <code>floor</code> function. This method is overall faster, however it tends to produce more pixelated 
+		results when the texture is magnified due to clusters of pixels mapping to the same texel.
+
+		<br><br>
+
+		The bilinear pixel sampling method takes the 4 nearest texels and lerps between them horizontally and vertically
+		through the fractional part of the texel coordinate. This method is overall slower compared to the nearest pixel
+		sampling method, but it tends to produce smoother results by blending neighboring texels.
+
+
+		<br><br>
+
+		The images below shows <code>svg/texmap/test1.svg</code> using nearest and bilinear pixel sampling at rates 1 and 16.
+		The images produced using nearest pixel sampling are noticeably more pixelated when magnified (or when one texel 
+		covers many pixels). This is due to nearest pixel sampling creating hard boundaries whereas bilinear pixel sampling
+		smooths these boundaries. At higher supersampling rates, the difference between the two methods is smaller since 
+		supersampling performs the averaging of multiple samples per pixel itself, providing a better approximation regardless
+		of the pixel sampling method. When the image is more minified (or when there are many texels per pixel), both pixel
+		sampling methods produce similar results, as sampling occurs across a texel dense region.
+
+		<br><br>
+
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="task-5-nearest-rate-1.png" width="400px"/>
+				  <figcaption>Task 5: Nearest Pixel Sampling at Rate 1</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="task-5-nearest-rate-16.png" width="400px"/>
+				  <figcaption>Task 5: Nearest Pixel Sampling at Rate 16</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="task-5-bilinear-rate-1.png" width="400px"/>
+				  <figcaption>Task 5: Bilinear Pixel Sampling at Rate 1</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="task-5-bilinear-rate-16.png" width="400px"/>
+				  <figcaption>Task 5: Bilinear Pixel Sampling at Rate 16</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
 
 		<h2>Task 6: "Level Sampling" with mipmaps for texture mapping</h2>
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
