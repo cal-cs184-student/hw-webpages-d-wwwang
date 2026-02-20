@@ -101,7 +101,7 @@
 
 		<br><br>
 
-		The images below show <code>test4.svg</code> at sample rates 1, 4, and 16. At rate 1, the corner has jaggies due to 
+		The images below shows <code>test4.svg</code> at sample rates 1, 4, and 16. At rate 1, the corner has jaggies due to 
 		aliasing. Furthermore, the corner itself is slightly disconnected due to the pixel centers falling outside of the 
 		thin triangle tip. At rates 4 and 16, subsamples near the corner partially cover pixels that were entirely missed
 		at rate 1, resulting in a gradual fade rather than the hard cutoff that was observed prior.
@@ -146,13 +146,46 @@
 
 		<br><br>
 
+		The image below shows <code>my-robot.svg</code>.
+
 		<figure>
 			<img src="task-3-robot.png" style="width:50%"/>
 			<figcaption>Task 3: My Robot Waving</figcaption>
 		</figure>
 
 		<h2>Task 4: Barycentric coordinates</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		Barycentric coordinates represent any point inside a triangle as a weighted linear combination of its three 
+		vertices in the form of the following:
+
+		\[(x, y) = \alpha A + \beta B + \gamma C \quad \text{where} \quad \alpha + \beta + \gamma = 1, \quad \alpha,\beta,\gamma \geq 0\]
+
+		Each weight \(\alpha\), \(\beta\), \(\gamma\) represents the distance of the point to each vertex. For instance, 
+		at vertex \(A\), \(\alpha=1\) and the other weights are 0. On the other hand, at the centroid of the triangle,
+		all weights are equal to \(\frac{1}{3}\).
+
+		Therefore, the color at any interior point is equal to the following weighted linear combination:
+
+		\[\alpha C_A + \beta C_B + \gamma C_C\]
+
+		The image below shows <code>barycentric.svg</code>, a triangle with a blue top vertex (\(\alpha=1\)), red left 
+		vertex (\(\beta=1\)), and green right vertex (\(\gamma=1\)). Furthermore, all of its interior points form a
+		gradient of colors based on the distance to each vertex.
+
+		<br><br>
+
+		<figure>
+			<img src="task-4-barycentric.png" style="width:50%"/>
+			<figcaption>Task 4: Barycentric Coordinate Example Triangle</figcaption>
+		</figure>
+
+		<br><br>
+
+		The image below shows <code>test7.svg</code>
+
+		<figure>
+			<img src="task-4-color-wheel.png" style="width:50%"/>
+			<figcaption>Task 4: Color Wheel</figcaption>
+		</figure>
 
 		<h2>Task 5: "Pixel sampling" for texture mapping</h2>
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
