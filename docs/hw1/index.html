@@ -51,26 +51,26 @@
 		Give a high-level overview of what you implemented in this homework. Think about what you've built as a whole. Share your thoughts on what interesting things you've learned from completing the homework.
 
 		<h2>Task 1: Drawing Single-Color Triangles</h2>
-		<p><b>Walk through how you rasterize triangles in your own words.</b></p>
 
-		<p>
-			Rasterization is the sampling of a 2D indicator function.
-		</p>
+		Rasterization is the sampling of a 2D indicator function.
 
-		<p>
-			I created <code>inside(float x0, float y0, float x1, float y1, float x2, float y2, float sx, float sy)</code>, which takes in the coordinates of a triangle as well as a sample point <code>(sx, sy)</code>. This function takes these points and performs the line equation tests as described in Lecture 2. To account for winding order of the vertices, each AND expression in the OR expression of the return statement checks for either \(>= 0\) (CCW) or \(<= 0\) (CW). 
-		</p>
+		<br><br>
+		
+		I created <code>inside(float x0, float y0, float x1, float y1, float x2, float y2, float sx, float sy)</code>, 
+		which takes in the coordinates of a triangle as well as a sample point <code>(sx, sy)</code>. This function takes 
+		these points and performs the line equation tests as described in Lecture 2. To account for winding order of the 
+		vertices, each AND expression in the OR expression of the return statement checks for either 
+		\(>= 0\) (CCW) or \(<= 0\) (CW). 
 
-		<p>
-			Then, I sampled each point within the bounding box of the triangle. The bounding box was determined by finding the bottommost, uppermost, leftmost, and rightmost 1D point of the triangle. From there, the sampled point was determined by adding (0.5, 0.5) to each point within the bounding box. For each sampled point, <code>fill_pixel(sx, sy, color)</code> is called if the indicator function <code>inside(x0, y0, x1, y1, x2, y2, sx, sy)</code> returns true.
-		</p>
-
-		<p><b>Explain how your algorithm is no worse than one that checks each sample within the bounding box of the triangle. The bounding box of the triangle is defined as the smallest rectangle that can be drawn whilst ensuring that the entire triangle is within it.</b></p>
-
-		<p>From the previous part, "I sampled each point within the bounding box of the triangle." Therefore, my algorithm is actually equivalent to one that checks each sample within the bounding box of the triangle.</p>
-
-		<p><b>Show a png screenshot of basic/test4.svg with the default viewing parameters and with the pixel inspector centered on an interesting part of the scene.</b></p>
-
+		<br><br>
+		
+		Then, I sampled each point within the bounding box of the triangle, making my algorithm equivalent to one that 
+		checks each sample within the bounding box of the triangle The bounding box was determined by finding the 
+		bottommost, uppermost, leftmost, and rightmost 1D point of the triangle. From there, the sampled point was 
+		determined by adding (0.5, 0.5) to each point within the bounding box. For each sampled point, 
+		<code>fill_pixel(sx, sy, color)</code> is called if the indicator function 
+		<code>inside(x0, y0, x1, y1, x2, y2, sx, sy)</code> returns true.
+	
 		<div style="text-align: center;">
 			<img src="task-1.png" width="400px"/>
 			<figcaption>Task 1: Shapes</figcaption>
