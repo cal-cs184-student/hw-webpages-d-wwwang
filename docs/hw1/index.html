@@ -43,8 +43,20 @@
 		-->
 
 		<h2>Overview</h2>
-		Give a high-level overview of what you implemented in this homework. Think about what you've built as a whole. Share your thoughts on what interesting things you've learned from completing the homework.
+  		In this homework, I built a rasterizer from scratch capable of rendering SVG files with triangles, transforms, 
+		texture mapping, and antialiasing. Starting from basic triangle rasterization using point-in-triangle tests, I 
+		progressively added supersampling for antialiasing, homogeneous coordinate transforms, barycentric color 
+		interpolation, and finally texture mapping with both pixel sampling and mipmap level sampling.
 
+  		<br><br>
+
+  		The most interesting thing I learned was how all three antialiasing techniques (supersampling, bilinear pixel 
+		sampling, and mipmap level sampling) are solving the same underlying problem (high-frequency content being 
+		undersampled) but from different angles. Supersampling brute-forces it by taking more samples per pixel,
+		bilinear sampling smooths within a single texture level, and mipmapping prefilters the texture so that minified 
+		regions never encounter aliasing in the first place. Seeing how they compose together into trilinear filtering, 
+		and understanding the speed and memory tradeoffs of each, has helped me gain a much more concrete understanding of 
+		how rendering and rasterizing processes handle texture quality.
 		<h2>Task 1: Drawing Single-Color Triangles</h2>
 
 		Rasterization is the sampling of a 2D indicator function.
