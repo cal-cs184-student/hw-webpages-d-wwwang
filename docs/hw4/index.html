@@ -281,7 +281,115 @@
 		</div>
 
 		<h2>Part 5: Shaders</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+		<p>
+			A shader program is a small program that runs directly on the GPU in parallel across every vertex or
+			fragment at once. There are two main types we use here. The vertex shader runs once
+			per vertex and transforms positions and normals from model space into world space
+			and eventually screen space, writing intermediate values (like world-space position and normal) into
+			outputs for the next stage. The fragment shader then runs once per
+			rasterized fragment (around a pixel) and receives those interpolated values. It uses them
+			to compute the final color, which it writes to <code>out_color</code>. Together they implement the
+			full lighting and material pipeline, where the vertex shader sets up geometry, and the fragment shader
+			decides how each point looks under lighting.
+		</p>
+
+		<p>
+			Blinn-Phong splits lighting into three terms. The ambient term is a constant
+			baseline color so nothing is ever completely black. The diffuse term depends on
+			the angle between the surface normal and the light direction. Surfaces facing the light are
+			bright, while surfaces facing away are dark. The specular term adds a shiny highlight
+			by measuring how close the halfway vector (between the light and the viewer) is to the surface
+			normal, raised to a power that controls how sharp the highlight is.
+		</p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="images/part5-phong-ambient.png" width="400px"/>
+				  <figcaption>Ambient component only.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="images/part5-phong-diffuse.png" width="400px"/>
+				  <figcaption>Diffuse component only.</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="images/part5-phong-specular.png" width="400px"/>
+				  <figcaption>Specular component only.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="images/part5-phong-full.png" width="400px"/>
+				  <figcaption>Full Blinn-Phong.</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<img src="images/part5-texture.png" width="600px"/>
+			<figcaption>Custom texture mapped onto the cloth.</figcaption>
+		</div>
+
+		<p>
+			Bump mapping transforms the surface normal at each fragment based on a height map so the lighting
+			interacts as if there is surface detail, but the actual geometry does not change. Displacement
+			mapping goes further, physically moving each vertex along its normal by an amount from
+			the height map. This makes it so the silhouette and depth of the object are actually transformed.
+		</p>
+		<p>
+			With a coarse sphere mesh (-o 16 -a 16), bump mapping still looks fairly smooth because the
+			normals are computed for each fragment. Displacement mapping on the coarse mesh looks blocky because
+			there are too few vertices to represent the fine height variation. With a dense mesh
+			(-o 128 -a 128), both methods look much more similar, but displacement still has visibly
+			raised geometry at the silhouette.
+		</p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="images/part5-bump-cloth.png" width="400px"/>
+				  <figcaption>Bump mapping on the cloth.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="images/part5-bump-sphere.png" width="400px"/>
+				  <figcaption>Bump mapping on the sphere.</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="images/part5-displacement-sphere.png" width="400px"/>
+				  <figcaption>Displacement mapping on the sphere.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="images/part5-displacement-sphere-coarse.png" width="400px"/>
+				  <figcaption>Displacement on coarse sphere (-o 16 -a 16) with blocky geometry.</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;" colspan="2">
+				  <img src="images/part5-displacement-sphere-fine.png" width="400px"/>
+				  <figcaption>Displacement on fine sphere (-o 128 -a 128) with smoother geometry.</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="images/part5-mirror-cloth.png" width="400px"/>
+				  <figcaption>Mirror shader on the cloth.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="images/part5-mirror-sphere.png" width="400px"/>
+				  <figcaption>Mirror shader on the sphere.</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
 
 		<h2>(Optional) Part 6: Extra Credit - Additional cloth simulation features!</h2>
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
