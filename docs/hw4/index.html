@@ -45,7 +45,28 @@
 		-->
 
 		<h2>Overview</h2>
-		Give a high-level overview of what you implemented in this homework. Think about what you've built as a whole. Share your thoughts on what interesting things you've learned from completing the homework.
+		<p>
+			In this homework, I built a real-time cloth simulator from scratch. The cloth is modeled as a
+			grid of point masses connected by structural, shearing, and bending springs. At each time step,
+			I compute forces on every point mass, including gravity and spring correction forces via
+			Hooke's law, and integrate them using Verlet integration to get new positions. I also
+			implemented the Provot constraint to prevent springs from stretching more than 10% per step.
+		</p>
+		<p>
+			On top of the basic simulation, I added collision handling with spheres and planes, as well as
+			self-collision detection using spatial hashing to prevent the cloth from clipping through itself.
+			For rendering, I implemented several GLSL shader programs: diffuse, Blinn-Phong, texture
+			mapping, bump and displacement mapping, and environment-mapped mirror reflections. I
+			wrote an additional custom shader that combines all five into one. I also added a spatially
+			varying wind force.
+		</p>
+		<p>
+			The most interesting thing I learned was how realistic the cloth simmulations were all from a
+			mass-spring model. Small changes to parameters like ks or density lead to dramatically
+			different behavior. On the shader side, seeing how
+			bump mapping can fake surface detail purely through lighting, without changing any geometry,
+			showed me how perception depends on shading much more than actual shape.
+		</p>
 
 		<h2>Part 1: Masses and springs</h2>
 		<p>The screenshots below show <code>scene/pinned2.json</code> under different constraint combinations.</p>
@@ -170,7 +191,7 @@
 			With ks = 500 N/m, the cloth is looser and wraps more tightly around the sphere, with more
 			folds draping down the sides. With ks = 5000 N/m (default), it drapes naturally with a smooth
 			curve over the top. With ks = 50000 N/m, the cloth is much stiffer and barely wraps around the
-			sphere. It holds its shape with more rigity and there are fewer folds.
+			sphere. It holds its shape with more rigidity and there are fewer folds.
 		</p>
 		<div style="display: flex; flex-direction: column; align-items: center;">
 			<table style="width: 100%; text-align: center; border-collapse: collapse;">
