@@ -409,7 +409,36 @@
 		</div>
 
 		<h2>(Optional) Part 6: Extra Credit - Additional cloth simulation features!</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+		<p>
+			I added a spatially varying wind force to the simulation. At each time step, a wind force is
+			applied to every unpinned point mass based on two factors: how much the local surface normal
+			faces into the wind direction (so the force only pushes on surfaces that are facing the wind,
+			not those pointing away), and a spatially varying multiplier using overlapping sine waves
+			based on the point mass's world position and a simulation time counter. This makes the wind
+			feel non-uniform and varying rather than a constant push. The wind direction is fixed at
+			(1, 0, 0.3) and the strength is adjustable in the GUI via a new "Wind" section with a toggle and a strength slider.
+		</p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="images/part6-wind-off.png" width="400px"/>
+				  <figcaption>Without wind. Cloth hangs at rest.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="images/part6-wind-on.png" width="400px"/>
+				  <figcaption>With wind enabled (5 N). Cloth gets blown and ripples from the spatially varying force.</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;" colspan="2">
+				  <img src="images/part6-wind-50.png" width="400px"/>
+				  <figcaption>High wind strength (50 N). Cloth is blown far out.</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
 		
 		</div>
 	</body>
